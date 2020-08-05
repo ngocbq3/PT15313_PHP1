@@ -17,6 +17,8 @@ if (isset($_POST['btnLogin'])) {
         if (password_verify($password, $user['password'])) {
             $_SESSION['user']['name'] = $username;
             $_SESSION['user']['avatar'] = $user['avatar'];
+            header("location: index.php");
+            die;
         } else {
             $pass_error = "Mật khẩu không chính xác";
         }
