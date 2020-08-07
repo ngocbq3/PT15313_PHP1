@@ -1,3 +1,10 @@
+<?php
+//Lấy dữ liệu của bảng categories
+$sql = "SELECT * FROM categories";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$cate = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,11 +20,10 @@
         <!--Menu-->
         <nav>
             <ul>
-                <li><a href="index.html">Trang chủ</a></li>
-                <li><a href="about.html">Giới thiệu</a></li>
-                <li><a href="news.html">Tin tức</a></li>
-                <li><a href="contact.html">Liên hệ</a></li>
-                <li><a href="album.html">Kho ảnh</a></li>
+                <li><a href="index.php">Trang chủ</a></li>
+                <?php foreach ($cate as $c) : ?>
+                    <li><a href="category.php?id=<?= $c['cate_id'] ?>"><?= $c['cate_name'] ?></a></li>
+                <?php endforeach; ?>
             </ul>
         </nav>
         <!--End menu-->

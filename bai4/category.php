@@ -1,10 +1,13 @@
 <?php
 require_once "connection.php";
+//Lấy id của category
+$cate_id = $_GET['id'];
 //Lấy 8 bản ghi trong bảng products
-$sql = "SELECT * FROM products ORDER BY pro_id DESC LIMIT 0,8";
+$sql = "SELECT * FROM products WHERE cate_id=$cate_id ORDER BY pro_id DESC LIMIT 0,8";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//echo count($products);
 ?>
 <!--Phần đầu của website-->
 <?php include_once "layout/header.php" ?>
@@ -16,7 +19,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php foreach ($products as $p) : ?>
             <div class="col">
                 <div class="product">
-                    <a href="detail.php?id=<?= $p['pro_id'] ?>">
+                    <a href="#">
                         <img src="images/<?= $p['pro_image'] ?>">
                         <h3><?= $p['pro_name'] ?></h3>
                         <div class="price"><?= $p['price'] ?></div>
